@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <Container size={'xl'} py={16}>
       <Grid>
-        <GridCol span={4}>
+        <GridCol span={{ xs: 12, md: 4 }}>
           <Flex direction={'column'} py={24} px={16}>
             <InputField />
             <Space h={'xl'} />
@@ -19,7 +19,7 @@ export default function Home() {
             <ErrorMessage />
           </Flex>
         </GridCol>
-        <GridCol span={8}>
+        <GridCol span={{ xs: 12, md: 8 }}>
           <Box w={'100%'} h={512}>
             <GoogleMapComp />
           </Box>

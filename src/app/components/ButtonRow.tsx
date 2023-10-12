@@ -5,10 +5,30 @@ import { getRoute, postRouteToken } from '../api/api';
 import { useAppContextHook } from '../context/AppContext';
 
 const ButtonRow = () => {
-  const { loading, setError, toggleLoading, setPathDetail, resetData } =
-    useAppContextHook();
+  const {
+    loading,
+    startPoint,
+    dropOffPoint,
+    setError,
+    toggleLoading,
+    setPathDetail,
+    setInputError,
+    resetData,
+  } = useAppContextHook();
 
   const handleSubmitClick = async () => {
+    if (startPoint === '' || dropOffPoint === '') {
+      if (startPoint === '') {
+        setInputError('start', true);
+      }
+      if (dropOffPoint === '') {
+        setInputError('drop', true);
+      }
+      return;
+    } else {
+      setInputError('start', false);
+      setInputError('drop', false);
+    }
     toggleLoading();
     setError('');
     try {
@@ -17,13 +37,10 @@ const ButtonRow = () => {
         const { token } = response;
         try {
           const res = await getRoute(token);
-          console.log({ res });
           if (res.status === 'failure') {
-            console.log('in failure');
             setError(res.error);
             toggleLoading();
           } else if (res.status === 'success') {
-            console.log('in success');
             setPathDetail({
               path: res.path,
               totalDistance: res.total_distance,
@@ -32,14 +49,12 @@ const ButtonRow = () => {
             toggleLoading();
           }
         } catch (error) {
-          console.log('in error');
           setError('Internal Server Error');
           toggleLoading();
         }
       }
     } catch (error) {
       //* set error message
-      console.log('set error');
       setError('Internal Server Error');
       toggleLoading();
     }

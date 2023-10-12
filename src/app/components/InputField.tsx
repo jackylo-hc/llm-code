@@ -11,7 +11,13 @@ const sampleLocation = [
 ];
 
 export default function InputField() {
-  const { startPoint, dropOffPoint, setLocation } = useAppContextHook();
+  const {
+    startPoint,
+    dropOffPoint,
+    startPointError,
+    dropOffPointError,
+    setLocation,
+  } = useAppContextHook();
 
   return (
     <>
@@ -20,13 +26,15 @@ export default function InputField() {
         label='Starting location'
         data={sampleLocation}
         onChange={(value) => setLocation('start', value)}
+        error={startPointError && 'Please input the starting location'}
       />
       <Space h={'xl'} />
       <Autocomplete
         value={dropOffPoint}
-        label='Starting location'
+        label='Drop-off location'
         data={sampleLocation}
         onChange={(value) => setLocation('drop', value)}
+        error={dropOffPointError && 'Please input the drop-off location'}
       />
     </>
   );

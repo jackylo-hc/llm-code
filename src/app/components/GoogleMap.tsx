@@ -26,12 +26,9 @@ const GoogleMapComp = () => {
     if (map && path && path.length > 0) {
       const routeCoordinates = path.reduce((acc, item) => {
         const _acc = [...acc];
-        console.log({ item });
         _acc.push({ lat: parseFloat(item[0]), lng: parseFloat(item[1]) });
         return _acc;
       }, [] as { lat: number; lng: number }[]);
-
-      console.log({ routeCoordinates });
 
       const routePath = new google.maps.Polyline({
         path: routeCoordinates,

@@ -1,5 +1,5 @@
 export const postRouteToken = async () => {
-  return fetch('http://localhost:8080/mock/route/success', {
+  return fetch('https://mock-api.dev.lalamove.com/mock/route/success', {
     method: 'POST',
   })
     .then((response) => response.json())
@@ -9,14 +9,12 @@ export const postRouteToken = async () => {
 };
 
 export const getRoute = async (token: string) => {
-  return fetch(`http://localhost:8080/route/${token}`, {
+  return fetch(`https://mock-api.dev.lalamove.com/route/${token}`, {
     method: 'GET',
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       if (data.status === 'in progress') {
-        console.log('retry');
         throw new Error('in progress');
       }
       return data;

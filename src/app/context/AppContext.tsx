@@ -16,7 +16,9 @@ interface StateType {
   totalTime: number;
   path?: Array<string[]>;
   startPoint: string;
+  startPointError?: boolean;
   dropOffPoint: string;
+  dropOffPointError?: boolean;
 }
 
 interface ValueType {
@@ -59,6 +61,8 @@ export const useAppContextHook = () => {
   const totalTime = state.totalTime;
   const startPoint = state.startPoint;
   const dropOffPoint = state.dropOffPoint;
+  const startPointError = state.startPointError;
+  const dropOffPointError = state.dropOffPointError;
 
   const setError = (msg: string) => {
     setState((prev) => ({
@@ -98,6 +102,15 @@ export const useAppContextHook = () => {
     }));
   };
 
+  const setInputError = (type: 'start' | 'drop', value: boolean) => {
+    setState((prev) => ({
+      ...prev,
+      ...(type === 'start'
+        ? { startPointError: value }
+        : { dropOffPointError: value }),
+    }));
+  };
+
   const resetData = () => {
     setState({
       loading: false,
@@ -117,10 +130,13 @@ export const useAppContextHook = () => {
     totalTime,
     startPoint,
     dropOffPoint,
+    startPointError,
+    dropOffPointError,
     setError,
     toggleLoading,
     setPathDetail,
     resetData,
     setLocation,
+    setInputError,
   };
 };
