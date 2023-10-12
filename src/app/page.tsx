@@ -1,22 +1,9 @@
-import {
-  Autocomplete,
-  Box,
-  Button,
-  Container,
-  Flex,
-  Grid,
-  GridCol,
-  Space,
-} from '@mantine/core';
+import { Box, Container, Flex, Grid, GridCol, Space } from '@mantine/core';
 import GoogleMapComp from './components/GoogleMap';
-
-//* just sample location for this code test, production should use real life location
-//* location also should be in async
-const sampleLocation = [
-  'Innocenter',
-  'Hong Kong Science Park',
-  'Hong Kong International Airport Terminal 1',
-];
+import ButtonRow from './components/ButtonRow';
+import ErrorMessage from './components/Error';
+import PathInfo from './components/PathInfo';
+import InputField from './components/InputField';
 
 export default function Home() {
   return (
@@ -24,13 +11,12 @@ export default function Home() {
       <Grid>
         <GridCol span={4}>
           <Flex direction={'column'} py={24} px={16}>
-            <Autocomplete label='Starting location' data={sampleLocation} />
+            <InputField />
             <Space h={'xl'} />
-            <Autocomplete label='Starting location' data={sampleLocation} />
-            <Flex mt={32}>
-              <Button mr={16}>Submit</Button>
-              <Button variant='default'>Reset</Button>
-            </Flex>
+            <PathInfo />
+            <Space h={'xl'} />
+            <ButtonRow />
+            <ErrorMessage />
           </Flex>
         </GridCol>
         <GridCol span={8}>

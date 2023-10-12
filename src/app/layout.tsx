@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import '@mantine/core/styles.css';
 
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+import { AppContextProvider } from './context/AppContext';
 
 export const metadata: Metadata = {};
 
@@ -17,7 +18,9 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider>{children}</MantineProvider>
+        <AppContextProvider>
+          <MantineProvider>{children}</MantineProvider>
+        </AppContextProvider>
       </body>
     </html>
   );
